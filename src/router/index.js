@@ -1,24 +1,35 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+// https://webpack.js.org/guides/dependency-management/#requirecontext
+const modulesFiles = require.context('../views', true, /\.vue$/)
+
+// you do not need `import app from './modules/app'`
+// it will auto require all vue module from modules file
+export const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  // set './app.js' => 'app'
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = modulesFiles(modulePath)
+  modules[moduleName] = value.default
+  return modules
+}, {})
+
+console.log(modules)
+
+const moduleRoutes = Object.keys(modules).map(key => {
+  return {
+    path: `/${key}`,
+    name: 'key',
+    component: modules[key]
   }
-]
+})
+const routes = [{
+  path: '/',
+  name: 'Home',
+  redirect: '/home'
+}].concat(moduleRoutes)
 
 const router = new VueRouter({
   routes

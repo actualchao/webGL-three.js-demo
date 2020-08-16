@@ -1,12 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <!-- <div id="nav">
+      <router-link v-for="route in Object.keys(modules)" :key="Math.random()+route" :to="`/${route}`"> {{route}}</router-link>
+    </div> -->
     <router-view/>
   </div>
 </template>
+
+<script type="text/ecmascript-6">
+import { modules } from '@/router'
+export default {
+  data () {
+    return {
+      modules
+    }
+  },
+  mounted () {
+
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
