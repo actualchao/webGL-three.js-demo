@@ -1,4 +1,3 @@
-
 <script type="text/ecmascript-6">
 import * as THREE from 'three'
 
@@ -14,7 +13,7 @@ export default {
       let renderer
       let camera
       let scene
-      let objectGroup
+      let mesh
 
       initThree()
       initCamera()
@@ -34,7 +33,7 @@ export default {
         camera = new THREE.PerspectiveCamera(70, dom.offsetWidth / dom.offsetHeight, 0.01, 10)
         camera.position.x = 0
         camera.position.y = 0
-        camera.position.z = 1
+        camera.position.z = 2
         camera.lookAt(0, 0, 0)
       }
 
@@ -43,29 +42,18 @@ export default {
       }
 
       function initObject () {
-        var geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+        var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-        const mesh = new THREE.Mesh(geometry, material)
-
-        var axesHelper = new THREE.AxesHelper(5)
-        // scene.add(axesHelper)
-        // scene.add(mesh)
-
-        objectGroup = new THREE.Object3D()
-        objectGroup.add(mesh)
-        objectGroup.add(axesHelper)
-
-        scene.add(objectGroup)
+        mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
       }
 
       function animate () {
         renderer.clear()
-        objectGroup.rotation.x += 0.01
-        objectGroup.rotation.y += 0.02
-        renderer.render(scene, camera)
-
-        /** 渲染循环 */
+        /** */
+        camera.position.x += 0.01
         requestAnimationFrame(animate)
+        renderer.render(scene, camera)
       }
     }
 

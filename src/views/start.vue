@@ -1,14 +1,9 @@
-
-<template>
-  <div ref="webgl" id="webgl-container">
-
-  </div>
-</template>
-
 <script type="text/ecmascript-6">
 import * as THREE from 'three'
 
 export default {
+  // template: '<div ref="webgl" id="webgl-container"></div>',
+  render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
     this.init()
   },
