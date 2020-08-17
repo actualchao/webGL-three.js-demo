@@ -1,4 +1,7 @@
 <script type="text/ecmascript-6">
+/**
+ * 移动场景方法 1、移动相机 2、
+ */
 import * as THREE from 'three'
 
 export default {
@@ -51,7 +54,8 @@ export default {
       function animate () {
         renderer.clear()
         /** */
-        camera.position.x += 0.01
+        // camera.position.x += 0.01
+        scene.position.x -= 0.01
         requestAnimationFrame(animate)
         renderer.render(scene, camera)
       }

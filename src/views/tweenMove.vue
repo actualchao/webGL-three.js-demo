@@ -1,5 +1,9 @@
 
 <script type="text/ecmascript-6">
+/**
+ * tween插件
+ * 封装的位置改变插件/支持链式调用
+ */
 import * as THREE from 'three'
 import TWEEN from 'tween'
 

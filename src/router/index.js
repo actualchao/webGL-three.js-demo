@@ -21,14 +21,14 @@ console.log(modules)
 const moduleRoutes = Object.keys(modules).map(key => {
   return {
     path: `/${key}`,
-    name: 'key',
+    name: key,
     component: modules[key]
   }
 })
 const routes = [{
   path: '/',
-  name: 'Home',
-  redirect: '/home'
+  name: 'Start',
+  redirect: '/start'
 }].concat(moduleRoutes)
 
 const router = new VueRouter({

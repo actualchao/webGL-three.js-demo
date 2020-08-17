@@ -1,5 +1,8 @@
 
 <script type="text/ecmascript-6">
+/**
+ * 添加geometry 画线，使用顶点着色
+ */
 import * as THREE from 'three'
 
 export default {
@@ -37,7 +40,7 @@ export default {
 
       function initObject () {
         // create a blue LineBasicMaterial
-        var material = new THREE.LineBasicMaterial({ vertexColors: true })
+        var material = new THREE.LineBasicMaterial({ vertexColors: true /** 顶点着色 */ })
         var points = []
         points.push(new THREE.Vector3(-10, 0, 0))
         points.push(new THREE.Vector3(10, 0, 0))

@@ -1,4 +1,7 @@
 <script type="text/ecmascript-6">
+/**
+ * 初始模版
+ */
 import * as THREE from 'three'
 
 export default {
@@ -42,7 +45,7 @@ export default {
       }
 
       function initObject () {
-        var geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+        var geometry = new THREE.BoxGeometry(0.4, 0.4, 0.4)
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
         mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh)

@@ -1,5 +1,9 @@
 
 <script type="text/ecmascript-6">
+/**
+ * 坐标系辅助工具，生成辅助坐标系
+ * 创建Object3D 类，作为group，把3D实例添加到group上实现分组
+ */
 import * as THREE from 'three'
 
 export default {
@@ -7,6 +11,7 @@ export default {
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
     this.init()
+    console.log(123)
   },
   methods: {
     init () {
