@@ -3,24 +3,28 @@
  * Stats 性能检测工具
  */
 import * as THREE from 'three'
-import Stats from 'stats.js'
+// import Stats from 'stats.js'
 
 export default {
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
-  mounted () {
-    // 初始化性能工具，
-    // 在渲染前后调用begin/end方法
-    this.stats = new Stats()
-    this.stats.dom.style.position = 'absolute'
-    this.stats.dom.style.top = '10px'
-    this.stats.dom.style.left = '10px'
-    document.body.appendChild(this.stats.dom)
-    this.stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-
+  async mounted () {
+    await this.initStats()
     this.init()
   },
   methods: {
+    async initStats () {
+      // 初始化性能工具，
+    // 在渲染前后调用begin/end方法
+      const { default: Stats } = await import('stats.js')
+      console.log(Stats)
+      this.stats = new Stats()
+      this.stats.dom.style.position = 'absolute'
+      this.stats.dom.style.top = '10px'
+      this.stats.dom.style.left = '10px'
+      document.body.appendChild(this.stats.dom)
+      this.stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+    },
     init () {
       const dom = this.$refs.webgl
       let renderer

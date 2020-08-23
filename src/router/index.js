@@ -6,17 +6,15 @@ Vue.use(VueRouter)
 // https://webpack.js.org/guides/dependency-management/#requirecontext
 const modulesFiles = require.context('../views', true, /\.vue$/)
 
-// you do not need `import app from './modules/app'`
+// you do not need `import app from './views/app'`
 // it will auto require all vue module from modules file
 export const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  // set './app.js' => 'app'
+  // set './app.vue' => 'app'
   const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
   const value = modulesFiles(modulePath)
   modules[moduleName] = value.default
   return modules
 }, {})
-
-console.log(modules)
 
 const moduleRoutes = Object.keys(modules).map(key => {
   return {

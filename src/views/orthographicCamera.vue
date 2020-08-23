@@ -1,12 +1,14 @@
-
 <script type="text/ecmascript-6">
 /**
- * 坐标系辅助工具，生成辅助坐标系
- * 创建Object3D 类，作为group，把3D实例添加到group上实现分组
+ * 平行相机
+ * OrthographicCamera
  *
- * AxesHelper
- * size?: number //坐标轴长度
- *
+ * left: number,//视窗左边
+ * right: number,//视窗右边
+ * top: number,// 视窗上
+ * bottom: number,//视窗下
+ * near?: number,// 近平面
+ * far?: number// 远平面
  */
 import * as THREE from 'three'
 
@@ -15,7 +17,6 @@ export default {
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
     this.init()
-    console.log(123)
   },
   methods: {
     init () {
@@ -23,7 +24,7 @@ export default {
       let renderer
       let camera
       let scene
-      let objectGroup
+      let mesh
 
       initThree()
       initCamera()
@@ -40,11 +41,14 @@ export default {
         renderer.setClearColor('0xFFFFFF', 1.0)
       }
       function initCamera () {
-        camera = new THREE.PerspectiveCamera(70, dom.offsetWidth / dom.offsetHeight, 0.01, 10)
-        camera.position.x = 0
+        camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 400)
+        camera.position.x = 0 // 相机位置
         camera.position.y = 0
         camera.position.z = 1
-        camera.lookAt(0, 0, 0)
+        camera.up.x = 1 // 相机旋转上方向指向，相当于在相机屏幕平面内指向哪儿
+        camera.up.y = 0
+        camera.up.z = 0
+        camera.lookAt(0, 0, 0)// 相机看向哪儿
       }
 
       function initScene () {
@@ -52,27 +56,19 @@ export default {
       }
 
       function initObject () {
-        var geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+        var geometry = new THREE.BoxGeometry(0.5, 1, 0.5)
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-        const mesh = new THREE.Mesh(geometry, material)
-
-        var axesHelper = new THREE.AxesHelper(5)
-
-        objectGroup = new THREE.Object3D()
-        objectGroup.add(mesh)
-        objectGroup.add(axesHelper)
-
-        scene.add(objectGroup)
+        mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
       }
 
       function animate () {
         renderer.clear()
-        objectGroup.rotation.x += 0.01
-        objectGroup.rotation.y += 0.02
-        renderer.render(scene, camera)
-
-        /** 渲染循环 */
         requestAnimationFrame(animate)
+
+        // mesh.rotation.y += 0.01
+        // mesh.rotation.x += 0.01
+        renderer.render(scene, camera)
       }
     }
 
