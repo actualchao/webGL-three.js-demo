@@ -1,9 +1,11 @@
 <script type="text/ecmascript-6">
 /**
  * 方向光，平行光
- * THREE.DirectionalLight
+ * THREE.PointLight
  * @param {} color 十六进制颜色
  * @param {} intensity 光强度 0-1之间
+ * @param {number} distance 光照距离
+ * @param {} decay 光衰弱
  */
 
 import * as THREE from 'three'
@@ -20,7 +22,7 @@ export default {
     this.init()
   },
   methods: {
-    init (lightType) {
+    init () {
       const dom = this.$refs.webgl
       let renderer
       let camera
@@ -73,6 +75,7 @@ export default {
 
       const initObject = () => {
         var geometry = new THREE.CylinderGeometry(0.4, 0.4, 0.8, 20, 1, false)
+
         var material = new THREE.MeshLambertMaterial({ color: 0xFFFFFF })
 
         mesh = new THREE.Mesh(geometry, material)
