@@ -1,6 +1,6 @@
 <script type="text/ecmascript-6">
 /**
- * 平行相机
+ * 正投影相机
  * OrthographicCamera
  *
  * left: number,//视窗左边
