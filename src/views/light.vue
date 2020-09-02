@@ -77,7 +77,6 @@ export default {
 
       const initAmbientLight = () => {
         light = new THREE.AmbientLight(0xff0000)
-
         scene.add(light)
       }
 
