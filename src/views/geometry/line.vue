@@ -3,8 +3,8 @@
 /**
  * 添加geometry 画线，使用顶点着色
  */
-import * as THREE from 'three'
 
+import * as THREE from 'three'
 export default {
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),

@@ -4,7 +4,6 @@
  * npm install --save dat.gui
  *
  */
-
 import * as THREE from 'three'
 export default {
   // template: '<div ref="webgl" id="webgl-container"></div>',

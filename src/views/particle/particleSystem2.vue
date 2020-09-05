@@ -4,8 +4,8 @@
  * 在边长固定的立方体内绘制固定个数的随机三角形碎片
  * 色值选取固定顶点着色
  */
-import * as THREE from 'three'
 
+import * as THREE from 'three'
 export default {
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   async mounted () {

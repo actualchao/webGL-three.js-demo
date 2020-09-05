@@ -2,9 +2,9 @@
 /**
  * Stats 性能检测工具
  */
-import * as THREE from 'three'
-// import Stats from 'stats.js'
 
+// import Stats from 'stats.js'
+import * as THREE from 'three'
 export default {
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),

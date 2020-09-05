@@ -7,8 +7,8 @@
  * @param {number} distance 光照距离
  * @param {} decay 光衰弱
  */
-
 import * as THREE from 'three'
+
 export default {
   render: function (h) {
     return h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }, [

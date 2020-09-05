@@ -1,13 +1,14 @@
 <script type="text/ecmascript-6">
 /**
  * 方向光，平行光
- * THREE.PointLight
+ * THREE.DirectionalLight
  * @param {} color 十六进制颜色
  * @param {} intensity 光强度 0-1之间
- * @param {number} distance 光照距离
- * @param {} decay 光衰弱
+ *
+ * 环境光，只有颜色
+ * THREE.AmbientLiht
+ * @param {} color 十六进制颜色
  */
-
 import * as THREE from 'three'
 export default {
   render: function (h) {
@@ -19,10 +20,11 @@ export default {
     return { color: '#ff0000' }
   },
   mounted () {
-    this.init()
+    this.init('directionalLight')
+    this.init('ambientLight')
   },
   methods: {
-    init () {
+    init (lightType) {
       const dom = this.$refs.webgl
       let renderer
       let camera
@@ -30,7 +32,7 @@ export default {
       let mesh
       let light
       let gui
-      const guiData = { fov: 45, lightX: 5, lightY: 5, lightZ: 5, intensity: 0.8, ratateX: 0, ratateY: 0, ratateZ: 0, distance: 20, decay: 0.8 }
+      const guiData = { fov: 45, lightX: 5, lightY: 5, lightZ: 5, intensity: 0.8, ratateX: 0, ratateY: 0, ratateZ: 0 }
 
       const createGui = async () => {
         if (gui) return
@@ -44,8 +46,6 @@ export default {
         gui.add(guiData, 'ratateX', 0, 3.14).name('旋转角度X')
         gui.add(guiData, 'ratateY', 0, 3.14).name('旋转角度Y')
         gui.add(guiData, 'ratateZ', 0, 3.14).name('旋转角度Z')
-        gui.add(guiData, 'distance', 0, 100).name('光照距离')
-        gui.add(guiData, 'decay', 0, 1).name('光衰减')
       }
 
       const initThree = () => {
@@ -58,8 +58,8 @@ export default {
       }
       const initCamera = () => {
         camera = new THREE.PerspectiveCamera(guiData.fov, dom.offsetWidth * 0.5 / dom.offsetHeight, 0.01, 10)
-        camera.position.x = 5
-        camera.position.y = 5
+        camera.position.x = 0
+        camera.position.y = 2
         camera.position.z = 5
         camera.lookAt(0, 0, 0)
       }
@@ -68,14 +68,19 @@ export default {
         scene = new THREE.Scene()
       }
 
-      const initLight = () => {
-        light = new THREE.PointLight(this.color, guiData.intensity, guiData.distance, guiData.decay)
+      const initDirectionalLight = () => {
+        light = new THREE.DirectionalLight(0xff0000, guiData.intensity)
+        light.position.set(guiData.lightX, guiData.lightY, guiData.lightZ)
+        scene.add(light)
+      }
+
+      const initAmbientLight = () => {
+        light = new THREE.AmbientLight(0xff0000)
         scene.add(light)
       }
 
       const initObject = () => {
         var geometry = new THREE.CylinderGeometry(0.4, 0.4, 0.8, 20, 1, false)
-
         var material = new THREE.MeshLambertMaterial({ color: 0xFFFFFF })
 
         mesh = new THREE.Mesh(geometry, material)
@@ -92,8 +97,6 @@ export default {
         camera.updateProjectionMatrix()
         light.position.set(guiData.lightX, guiData.lightY, guiData.lightZ)
         light.intensity = guiData.intensity
-        light.distance = guiData.distance
-        light.decay = guiData.decay
         light.color.setHex('0x' + this.color.slice(1, 8))
 
         mesh.rotation.x = guiData.ratateX
@@ -106,7 +109,8 @@ export default {
       initThree()
       initCamera()
       initScene()
-      initLight()
+      lightType === 'directionalLight' && initDirectionalLight()
+      lightType === 'ambientLight' && initAmbientLight()
       initObject()
       animate()
     }

@@ -6,6 +6,7 @@
  * 使用geometry face 面索引创建三角形面
  * 使用face 的顶点着色器着色
  */
+
 import * as THREE from 'three'
 
 export default {

@@ -1,22 +1,28 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link v-for="route in Object.keys(modules)" :key="Math.random()+route" :to="`/${route}`"> {{route}}</router-link>
-    </div> -->
-    <router-view/>
+    <sidebar class="sidebar" :menu="levelMenu" @menuChange="handleMenuChange('sidebar',$event)"></sidebar>
+    <div class="main-container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { modules } from '@/router'
+import { levelMenu } from '@/router'
+
 export default {
   data () {
     return {
-      modules
+      levelMenu
     }
   },
-  mounted () {
-
+  components: {
+    sidebar: () => import('@/components/Sidebar.vue')
+  },
+  methods: {
+    handleMenuChange (key, path) {
+      this.$router.push('/' + path)
+    }
   }
 }
 </script>
@@ -28,6 +34,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-flow: row nowrap;
+  .sidebar{
+    width: 200px;
+  }
+  .main-container{
+    flex: 1;
+  }
 }
 
 #nav {

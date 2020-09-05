@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import buildLevelMenu from './menuLevel'
 
 Vue.use(VueRouter)
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext
 const modulesFiles = require.context('../views', true, /\.vue$/)
-
 // you do not need `import app from './views/app'`
 // it will auto require all vue module from modules file
 export const modules = modulesFiles.keys().reduce((modules, modulePath) => {
-  // set './app.vue' => 'app'
   const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
   const value = modulesFiles(modulePath)
   modules[moduleName] = value.default
@@ -32,5 +31,7 @@ const routes = [{
 const router = new VueRouter({
   routes
 })
+
+export const levelMenu = buildLevelMenu(modulesFiles.keys())
 
 export default router
