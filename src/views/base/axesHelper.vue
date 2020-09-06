@@ -15,7 +15,6 @@ export default {
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
     this.init()
-    console.log(123)
   },
   methods: {
     init () {

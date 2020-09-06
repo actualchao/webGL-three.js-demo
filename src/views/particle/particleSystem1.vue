@@ -74,8 +74,6 @@ export default {
           vertices[3 * i + 1] = po[1]
           vertices[3 * i + 2] = po[2]
 
-          console.log(color)
-
           colors[3 * i + 0] = color[0]
           colors[3 * i + 1] = color[1]
           colors[3 * i + 2] = color[2]

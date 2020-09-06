@@ -65,7 +65,6 @@ export default {
 
         textureCube = new THREE.CubeTextureLoader().load(urls)
 
-        console.log(textureCube)
         scene = new THREE.Scene()
         scene.background = textureCube
       }

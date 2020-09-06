@@ -17,7 +17,6 @@ export default {
       // 初始化性能工具，
     // 在渲染前后调用begin/end方法
       const { default: Stats } = await import('stats.js')
-      console.log(Stats)
       this.stats = new Stats()
       this.stats.dom.style.position = 'absolute'
       this.stats.dom.style.top = '10px'

@@ -66,7 +66,7 @@ export default {
           //  记录几何中心
           const box = new THREE.Box3()
           box.setFromObject(mesh)
-          // 把几何物体旋转中心又原点设置为几何中心
+          // 把几何物体旋转中心由原点设置为几何中心
           box.center(mesh.position)
           // 几何反转设置几何中心到原点
           mesh.position.multiplyScalar(-1)

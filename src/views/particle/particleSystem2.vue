@@ -82,8 +82,6 @@ export default {
         const arrW = computedArr(W, stepW)
         // const arrH = computedArr(H, stepH)
 
-        console.log(arrL, arrW)
-
         geometry = new THREE.BufferGeometry()
 
         const count = arrL.length * arrW.length
