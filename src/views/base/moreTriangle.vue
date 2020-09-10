@@ -6,7 +6,10 @@
  */
 
 import * as THREE from 'three'
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   async mounted () {
     await this.initStats()
@@ -135,10 +138,11 @@ export default {
 
       function animate () {
         window.stats.begin()
-        render.render(scene, camera)
         mesh.rotation.x += 0.01
         mesh.rotation.y += 0.01
-        requestAnimationFrame(animate)
+        console.log(123)
+        flag && requestAnimationFrame(animate)
+        render.render(scene, camera)
         window.stats.end()
       }
 

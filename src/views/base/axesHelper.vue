@@ -10,7 +10,10 @@
  */
 import * as THREE from 'three'
 
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
@@ -71,7 +74,7 @@ export default {
         renderer.render(scene, camera)
 
         /** 渲染循环 */
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
       }
     }
 

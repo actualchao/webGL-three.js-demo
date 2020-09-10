@@ -8,7 +8,6 @@
  */
 
 import * as THREE from 'three'
-
 export default {
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {

@@ -8,7 +8,10 @@
  * @param {} decay 光衰弱
  */
 import * as THREE from 'three'
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   render: function (h) {
     return h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }, [
       (<el-color-picker v-model={this.color} color-format="hex"></el-color-picker>)
@@ -85,7 +88,7 @@ export default {
 
       const animate = () => {
         renderer.clear()
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
         // 根据gui参数调整相机fov
         camera.fov = guiData.fov
         camera.updateProjectionMatrix()

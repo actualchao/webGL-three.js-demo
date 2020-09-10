@@ -12,7 +12,10 @@
  */
 
 import * as THREE from 'three'
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
@@ -72,7 +75,7 @@ export default {
 
       function animate () {
         renderer.clear()
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
         mesh.rotation.x += 0.01
         mesh.rotation.y += 0.02
         renderer.render(scene, camera)

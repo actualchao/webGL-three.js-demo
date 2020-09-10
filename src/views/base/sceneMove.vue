@@ -3,7 +3,10 @@
  * 移动场景方法 1、移动相机 2、移动场景
  */
 import * as THREE from 'three'
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
@@ -56,7 +59,7 @@ export default {
         /** */
         // camera.position.x += 0.01
         scene.position.x -= 0.01
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
         renderer.render(scene, camera)
       }
     }

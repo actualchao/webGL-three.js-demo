@@ -9,7 +9,6 @@
 
 <script type="text/ecmascript-6">
 import { levelMenu } from '@/router'
-
 export default {
   data () {
     return {
@@ -35,12 +34,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   display: flex;
+  width: 100%;
+  position: relative;
   flex-flow: row nowrap;
   .sidebar{
     width: 200px;
   }
   .main-container{
     flex: 1;
+    width: calc(100% - 200px);
   }
 }
 

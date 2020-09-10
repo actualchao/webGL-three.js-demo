@@ -7,7 +7,10 @@
 import * as THREE from 'three'
 import TWEEN from 'tween'
 
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   // template: '<div ref="webgl" id="webgl-container"></div>',
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
@@ -66,7 +69,7 @@ export default {
 
       function animate () {
         renderer.clear()
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
         renderer.render(scene, camera)
         TWEEN.update()
       }

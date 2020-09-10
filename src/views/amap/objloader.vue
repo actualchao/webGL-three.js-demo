@@ -11,7 +11,6 @@ import MapContainer from '@/utils/amap-utils.js'
 import * as THREE from 'three'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
-
 export default {
   mounted () {
     this.initMap(this.$refs.amap)

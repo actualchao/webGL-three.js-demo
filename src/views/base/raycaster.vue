@@ -4,7 +4,10 @@
  */
 import * as THREE from 'three'
 
+let flag = true
 export default {
+  beforeDestroy () { flag = false },
+  created () { flag = true },
   render: h => h('div', { ref: 'webgl', attrs: { id: 'webgl-container' } }),
   mounted () {
     this.init()
@@ -83,7 +86,7 @@ export default {
 
       let oldColor
       function animate () {
-        requestAnimationFrame(animate)
+        flag && requestAnimationFrame(animate)
 
         // console.log({ x: mouseX, y: mouseY })
 
