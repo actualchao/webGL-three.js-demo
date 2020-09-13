@@ -82,7 +82,7 @@ export default {
 
         function addFn (startPre, endPre, color, innerRadius = 16, outRadius = 20, height = 1) {
           height = color % 4 + 1
-          debugger
+
           const startAngle = startPre * 2 * Math.PI
           const endAngle = endPre * 2 * Math.PI
           const precent = innerRadius / outRadius
