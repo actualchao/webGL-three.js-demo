@@ -23,8 +23,6 @@ export default {
       let group
 
       initThree()
-      initCamera()
-      initScene()
       initObject()
       animate()
 
@@ -35,16 +33,13 @@ export default {
         renderer.setSize(dom.offsetWidth, dom.offsetHeight)
         dom.appendChild(renderer.domElement)
         renderer.setClearColor('0xFFFFFF', 1.0)
-      }
-      function initCamera () {
+
         camera = new THREE.PerspectiveCamera(70, dom.offsetWidth / dom.offsetHeight, 0.01, 200)
         camera.position.x = 0
         camera.position.y = 20
         camera.position.z = 20
         camera.lookAt(0, 0, 0)
-      }
 
-      function initScene () {
         scene = new THREE.Scene()
       }
 

@@ -36,7 +36,7 @@ export default {
       async function createGui () {
         if (gui) return
         const dat = require('dat.gui')
-        gui = gui = new dat.GUI({ name: 'my-GUI' })
+        gui = new dat.GUI({ name: 'my-GUI' })
         gui.add(guiData, 'fov', 0, 90).name('视角')
       }
 
