@@ -15,6 +15,7 @@ let idleWeight, walkWeight, runWeight
 let mixer, actions, clock
 let guiSetting
 let singleMode, singleModeSize
+const controlArr = []
 
 
 export default {
@@ -90,6 +91,7 @@ export default {
       loader.load('models/Soldier.glb', handleObject)
 
       function handleObject (gltf) {
+        window.gltf = gltf
         model = gltf.scene
         scene.add(model)
         // 投射阴影
@@ -180,13 +182,28 @@ export default {
       folder3.add(guiSetting, 'make single step')
       folder3.add(guiSetting, 'modify step size', 0.01, 1)
 
-      folder4.add(guiSetting, 'from idle to walk')
-      folder4.add(guiSetting, 'from walk to run')
-      folder4.add(guiSetting, 'from idle to run')
-      folder4.add(guiSetting, 'from run to walk')
+      controlArr.push(folder4.add(guiSetting, 'from idle to walk'))
+      controlArr.push(folder4.add(guiSetting, 'from walk to run'))
+      controlArr.push(folder4.add(guiSetting, 'from idle to run'))
+      controlArr.push(folder4.add(guiSetting, 'from run to walk'))
+
+      controlArr.forEach(function (control) {
+        control.classList1 = control.domElement.parentElement.parentElement.classList
+        control.classList2 = control.domElement.previousElementSibling.classList
+        control.setDisabled = function () {
+          control.classList1.add('no-pointer-events')
+          control.classList2.add('control-disabled')
+        }
+
+        control.setEnabled = function () {
+          control.classList1.remove('no-pointer-events')
+          control.classList2.remove('control-disabled')
+        }
+      })
+
+
       folder4.add(guiSetting, 'use default duration')
       folder4.add(guiSetting, 'set duration', 0.2, 2)
-
 
 
       folder5.add(guiSetting, 'modify idle weight', 0.0, 1.0).onChange(v => { setWeight(idleAction, guiSetting['modify idle weight']) }).listen()
@@ -232,8 +249,6 @@ export default {
       guiSetting['modify idle weight'] = idleWeight
       guiSetting['modify run weight'] = runWeight
       guiSetting['modify walk weight'] = walkWeight
-
-      console.log(guiSetting['modify idle weight'])
     }
 
     function unPauseAllActions () {
@@ -288,6 +303,25 @@ export default {
       start.crossFadeTo(to, duration, true)
     }
 
+    function updataControlsDisable () {
+      controlArr.forEach(control => {
+        control.setDisabled()
+      })
+
+      if (idleWeight === 1) {
+        controlArr[0].setEnabled()
+        controlArr[2].setEnabled()
+      }
+
+      if (walkWeight === 1) {
+        controlArr[1].setEnabled()
+      }
+
+      if (runWeight === 1) {
+        controlArr[3].setEnabled()
+      }
+    }
+
 
     // 渲染
     function render () {
@@ -298,6 +332,8 @@ export default {
       runWeight = runAction.getEffectiveWeight()
 
       updateSettingWeight()
+
+      updataControlsDisable()
 
       var mixerUpdateDelta = clock.getDelta()
 
@@ -328,3 +364,15 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss">
+.no-pointer-events {
+  pointer-events: none;
+}
+
+.control-disabled {
+  color: #888;
+  text-decoration: line-through;
+}
+</style>

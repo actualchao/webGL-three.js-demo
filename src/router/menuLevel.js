@@ -1,4 +1,13 @@
 
+
+/**
+ * 路径字符转树形结构
+ * for examples
+ * ['aa/bb/cc','aa/bb/dd','bb/cc']
+ *
+
+ * @param {Array} pathArr 路径字符串数组
+ */
 export default function buildLevelMenu (pathArr) {
   pathArr = pathArr.map(path => path.replace(/^\.\/(.*)\.\w+$/, '$1'))
 
