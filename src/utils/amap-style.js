@@ -1,15 +1,15 @@
 import AMap from 'AMap'
-// import Location from '@/assets/images/location-icon.png'
-// import ashbinMarker from '@/assets/images/ashbin.png'
-// import companyMarker from '@/assets/images/company.png'
+// import Location from '@/assets/three-page/images/location-icon.png'
+// import ashbinMarker from '@/assets/three-page/images/ashbin.png'
+// import companyMarker from '@/assets/three-page/images/company.png'
 
-const BASE_URL = (process.env.VUE_APP_BASEURL || '') + '/images/'
+const BASE_URL = (process.env.VUE_APP_BASEURL || '') + '/three-page/images/'
 
 export default {
   // 定位图标
   location: {
     image: BASE_URL + 'location-icon.png',
-    imageSize: new AMap.Size(18, 27),
+    imagesize: new AMap.Size(18, 27),
     size: new AMap.Size(18, 27)
   }
 }

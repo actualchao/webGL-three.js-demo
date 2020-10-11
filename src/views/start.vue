@@ -45,7 +45,7 @@ export default {
 
       function initObject () {
         const loader = new OBJLoader()
-        loader.setPath('/modal/obj3/').load('Model.obj', geometry => {
+        loader.setPath('/three-page/modal/obj3/').load('Model.obj', geometry => {
           geometry = geometry.children[0].geometry
           var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
           const mesh = new THREE.Mesh(geometry, material)

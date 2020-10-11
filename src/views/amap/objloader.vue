@@ -59,14 +59,14 @@ export default {
 
       //  开始加载材质信息
       mtlLoader
-        .setPath('/modal/obj2/')
+        .setPath('/three-page/modal/obj2/')
         .load('Model.mtl', (materials) => {
           // 给objloader 挂载材质属性，
           objLoader.setMaterials(materials)
 
           // 开始加载obj 模型
           objLoader
-            .setPath('/modal/obj2/')
+            .setPath('/three-page/modal/obj2/')
             .load('Model.obj', geometry => {
               // 初始化高德3D涂层
               const object3Dlayer = new AMap.Object3DLayer()
@@ -115,7 +115,7 @@ export default {
                 // 控制台能拿到image 但是js 读取不到，bug待查
                 // 手动按照顺序添加纹理贴图
                 // console.log(map.image)
-                map && amapMesh.textures.push('/modal/obj2/mat 00 02.png', '/modal/obj2/mat 01.png', '/modal/obj2/mat 00 02.png')
+                map && amapMesh.textures.push('/three-page/modal/obj2/mat 00 02.png', '/three-page/modal/obj2/mat 01.png', '/three-page/modal/obj2/mat 00 02.png')
 
                 amapMesh.rotateZ(180)
 

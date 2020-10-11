@@ -244,7 +244,7 @@ export default class MapContainer {
     this.movePoint = new AMap.Marker({
       map: this.map,
       position: path[0],
-      icon: (process.env.VUE_APP_BASEURL || '') + `/images/${iconName}.png`,
+      icon: (process.env.VUE_APP_BASEURL || '') + `/three-page/images/${iconName}.png`,
       offset: new AMap.Pixel(-17, -40),
       zIndex: 200,
       // autoRotation: true,

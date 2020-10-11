@@ -58,7 +58,7 @@ export default {
       }
 
       function initScene () {
-        var path = '/images/cobeBack/'
+        var path = '/three-page/images/cobeBack/'
         var format = '.jpg'
         var urls = [
           path + 'p1' + format, path + 'p3' + format,

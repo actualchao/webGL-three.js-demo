@@ -132,7 +132,7 @@ export default {
         }
 
         const loader = new OBJLoader()
-        loader.setPath('/modal/obj1/').load('male.obj', model => {
+        loader.setPath('/three-page/modal/obj1/').load('male.obj', model => {
           const positions = combineBuffer(model, 'position')
           for (let i = 0; i < 10; i++) {
             addMesh(positions, createScale(6, 10), createMath(300), 0, createMath(250), createColor(), true)

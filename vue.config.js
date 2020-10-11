@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/three-page/',
   configureWebpack: {
     externals: {
       AMap: 'AMap'

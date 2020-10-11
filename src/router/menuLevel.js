@@ -9,6 +9,7 @@
  * @param {Array} pathArr 路径字符串数组
  */
 export default function buildLevelMenu (pathArr) {
+  console.log(pathArr)
   pathArr = pathArr.map(path => path.replace(/^\.\/(.*)\.\w+$/, '$1'))
 
   /** 根据层级菜单path 递归生成层级树 */
@@ -47,5 +48,7 @@ export default function buildLevelMenu (pathArr) {
     fn(levelMenu, path.split('/'), path)
   })
 
+
+  console.log(levelMenu)
   return levelMenu
 }
