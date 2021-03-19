@@ -27,7 +27,7 @@ const moduleRoutes = Object.keys(modules).map(key => {
 const routes = [{
   path: '/',
   name: 'Start',
-  redirect: '/start'
+  redirect: '/particle/particleSystem3'
 }].concat(moduleRoutes)
 
 const router = new VueRouter({
